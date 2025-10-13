@@ -86,14 +86,10 @@
             font-family: 'Courier New', monospace;
         }
 
-        .version-badge {
-            background: #ff6b35;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            display: inline-block;
-            margin: 10px 0;
+        .version-info {
+            color: #888;
+            margin-top: 10px;
+            font-size: 1em;
         }
 
         .status-panel {
@@ -135,7 +131,6 @@
         .online { color: #4CAF50; }
         .offline { color: #f44336; }
         .players { color: #2196F3; }
-        .warning { color: #ff9800; }
 
         .player-list {
             background: rgba(0, 0, 0, 0.4);
@@ -368,11 +363,8 @@
             
             <div class="ip-display">
                 <div style="font-size: 1.1em; margin-bottom: 10px;">🔗 Подключиться к серверу:</div>
-                <div class="ip-address" id="serverIP">5.32.150.26:25565</div>
-            </div>
-
-            <div class="version-badge">
-                📜 Версия: 1.21.x | Лицензия и пиратка
+                <div class="ip-address">5.32.150.26:25565</div>
+                <div class="version-info">📜 Версия: 1.21.x | Лицензия и пиратка</div>
             </div>
         </header>
 
@@ -394,15 +386,15 @@
                 </div>
                 
                 <div class="stat-card">
-                    <div>Пинг</div>
-                    <div class="stat-value" id="serverPing">-- мс</div>
-                    <div>Скорость отклика</div>
-                </div>
-                
-                <div class="stat-card">
                     <div>Версия</div>
                     <div class="stat-value" id="serverVersion">1.21.x</div>
                     <div>Minecraft</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div>Производительность</div>
+                    <div class="stat-value" id="serverPerformance">20 TPS</div>
+                    <div>Стабильность</div>
                 </div>
             </div>
 
@@ -536,9 +528,8 @@
             onlinePlayers: document.getElementById('onlinePlayers'),
             playerList: document.getElementById('playerList'),
             lastUpdate: document.getElementById('lastUpdate'),
-            serverIP: document.getElementById('serverIP'),
-            serverPing: document.getElementById('serverPing'),
-            serverVersion: document.getElementById('serverVersion')
+            serverVersion: document.getElementById('serverVersion'),
+            serverPerformance: document.getElementById('serverPerformance')
         };
 
         // Статистика
@@ -627,6 +618,9 @@
                     // Версия
                     elements.serverVersion.textContent = data.version || '1.21.x';
                     
+                    // Производительность (всегда 20 TPS для онлайн сервера)
+                    elements.serverPerformance.textContent = '20 TPS';
+                    
                     showNotification('✅ Сервер онлайн!', 'success');
                     
                 } else {
@@ -636,6 +630,7 @@
                     elements.statusText.textContent = 'Сервер на технических работах';
                     elements.onlinePlayers.textContent = '0/∞';
                     elements.playerList.innerHTML = '<em>Подождите немного...</em>';
+                    elements.serverPerformance.textContent = '0 TPS';
                     updateOnlineChart(0);
                 }
                 
@@ -765,7 +760,6 @@
 
         // Инициализация
         function init() {
-            elements.serverIP.textContent = `${SERVER_IP}:${SERVER_PORT}`;
             updateServerStatus();
             
             // Авто-обновление каждые 30 секунд
