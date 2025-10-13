@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Stop — Minecraft сервер</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(135deg, #0c0c0c, #1a1a2e); 
+            color: white; font-family: Arial; 
+            min-height: 100vh; padding: 20px;
+            text-align: center;
+        }
+        .container { 
+            max-width: 600px; margin: 50px auto; 
+            background: rgba(0,0,0,0.8); 
+            padding: 30px; border-radius: 15px; 
+            border: 3px solid #ff6b35;
+            box-shadow: 0 0 30px rgba(255,107,53,0.3);
+        }
+        .server-title { 
+            font-size: 2.5em; font-weight: bold; 
+            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .ip-display { 
+            background: #1a1a2e; padding: 20px; 
+            border-radius: 10px; border: 2px solid #ff6b35; 
+            margin: 20px 0; font-size: 1.2em;
+        }
+        .ip-address { 
+            font-size: 1.8em; color: #ff6b35; 
+            font-weight: bold; font-family: 'Courier New';
+            margin: 10px 0;
+        }
+        .btn { 
+            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+            color: white; border: none; padding: 15px 30px; 
+            margin: 10px; border-radius: 8px; 
+            cursor: pointer; font-size: 1.1em; font-weight: bold;
+            display: inline-block;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .status-panel { 
+            background: rgba(255,107,53,0.1); 
+            padding: 20px; border-radius: 10px; 
+            margin: 20px 0; border: 1px solid rgba(255,107,53,0.3);
+        }
+        .online { color: #4CAF50; font-weight: bold; }
+        .offline { color: #f44336; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок -->
+        <div class="server-title">🎮 YOUR STOP</div>
+        <p style="color: #ccc; margin-bottom: 20px; font-size: 1.2em;">
+            — свобода, PvP и выживание без границ!
+        </p>
+
+        <!-- IP сервера -->
+        <div class="ip-display">
+            <div>🔗 ПОДКЛЮЧИТЬСЯ К СЕРВЕРУ:</div>
+            <div class="ip-address">5.32.150.26:25565</div>
+            <div style="color: #888; margin-top: 10px;">
+                Версия: 1.21.x | Лицензия и пиратка
+            </div>
+        </div>
+
+        <!-- Мониторинг -->
+        <div class="status-panel">
+            <h3>📊 СТАТУС СЕРВЕРА</h3>
+            <div id="status" style="font-size: 1.3em; margin: 15px 0;">
+                🔄 Проверяем сервер...
+            </div>
+            <div id="players" style="font-size: 1.1em; margin: 10px 0;">
+                Игроков онлайн: --
+            </div>
+            <button class="btn" onclick="updateStatus()" style="padding: 10px 20px;">
+                🔄 ОБНОВИТЬ СТАТУС
+            </button>
+        </div>
+
+        <!-- Основные кнопки -->
+        <div style="margin: 25px 0;">
+            <button class="btn" onclick="launchGame()">
+                🎮 ИГРАТЬ СЕЙЧАС
+            </button>
+            <button class="btn" onclick="copyIP()">
+                📋 КОПИРОВАТЬ IP
+            </button>
+        </div>
+
+        <!-- Помощь -->
+        <div style="
+            background: rgba(255,107,53,0.2); 
+            padding: 15px; border-radius: 8px; 
+            margin: 15px 0; border: 1px solid #ff6b35;
+        ">
+            <p>❓ <strong>Нужна помощь?</strong></p>
+            <p>Напиши в чате игры:</p>
+            <div style="
+                background: rgba(0,0,0,0.5); 
+                padding: 10px; margin: 10px 0;
+                border-radius: 5px; font-family: 'Courier New';
+                color: #ff6b35; font-weight: bold;
+            ">
+                /yshelp
+            </div>
+            <p>Узнай все возможности сервера!</p>
+        </div>
+
+        <!-- Особенности -->
+        <div style="margin-top: 25px; text-align: left;">
+            <h4>🧱 ОСОБЕННОСТИ СЕРВЕРА:</h4>
+            <ul style="color: #ccc; margin: 10px 0; padding-left: 20px;">
+                <li>Реалистичное выживание как в Rust</li>
+                <li>Рейды, базы, PvP</li>
+                <li>Телепорты /sethome и /tpa</li>
+                <li>Торговля между игроками</li>
+                <li>Система друзей и кланов</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Конфигурация
+        const SERVER_IP = '5.32.150.26';
+        const SERVER_PORT = '25565';
+
+        // Элементы
+        const statusElement = document.getElementById('status');
+        const playersElement = document.getElementById('players');
+
+        // Проверка статуса сервера
+        async function updateStatus() {
+            try {
+                statusElement.innerHTML = '🔄 Проверяем сервер...';
+                
+                const response = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}:${SERVER_PORT}`);
+                const data = await response.json();
+                
+                if (data.online) {
+                    statusElement.innerHTML = '🟢 СЕРВЕР ОНЛАЙН';
+                    statusElement.className = 'online';
+                    
+                    const online = data.players?.online || 0;
+                    const max = data.players?.max || '∞';
+                    playersElement.innerHTML = `Игроков онлайн: ${online}/${max}`;
+                    
+                } else {
+                    statusElement.innerHTML = '🔴 СЕРВЕР ОФФЛАЙН';
+                    statusElement.className = 'offline';
+                    playersElement.innerHTML = 'Игроков онлайн: 0/∞';
+                }
+                
+            } catch (error) {
+                statusElement.innerHTML = '❌ Ошибка проверки';
+                statusElement.className = 'offline';
+            }
+        }
+
+        // Запуск игры
+        function launchGame() {
+            // Пытаемся открыть Minecraft
+            window.location.href = `minecraft://?server=${SERVER_IP}&port=${SERVER_PORT}`;
+            
+            // Инструкция если не сработало
+            setTimeout(() => {
+                alert(
+                    '🎮 КАК ПОДКЛЮЧИТЬСЯ:\n\n' +
+                    '1. Откройте Minecraft 1.21.x\n' +
+                    '2. Нажмите "Сетевая игра"\n' + 
+                    '3. Нажмите "Добавить сервер"\n' +
+                    '4. Введите данные:\n\n' +
+                    `   Адрес: ${SERVER_IP}\n` +
+                    '   Порт: 25565\n\n' +
+                    '5. Нажмите "Подключиться"'
+                );
+            }, 2000);
+        }
+
+        // Копирование IP
+        async function copyIP() {
+            const ipText = `${SERVER_IP}:${SERVER_PORT}`;
+            
+            try {
+                // Современный способ
+                await navigator.clipboard.writeText(ipText);
+                alert('✅ IP скопирован!\n\n' + ipText);
+            } catch (err) {
+                // Старый способ для надежности
+                const input = document.createElement('input');
+                input.value = ipText;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                alert('✅ IP скопирован: ' + ipText);
+            }
+        }
+
+        // Автоматическая проверка при загрузке
+        window.onload = function() {
+            updateStatus();
+            
+            // Обновляем каждые 30 секунд
+            setInterval(updateStatus, 30000);
+        };
+    </script>
+</body>
+</html>
