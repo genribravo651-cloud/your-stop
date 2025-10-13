@@ -1,9 +1,57 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" itemscope itemtype="https://schema.org/WebPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Stop — свобода, PvP и выживание без границ!</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Your Stop Minecraft Server 🎮 | PvP Выживание 1.21.x | IP: 5.32.150.26</title>
+    <meta name="description" content="⚔️ Your Stop - уникальный Minecraft сервер с PvP выживанием, рейдами и прокачкой блоков. Подключись по IP: 5.32.150.26:25565. Версия 1.21.x, лицензия и пиратка.">
+    <meta name="keywords" content="minecraft сервер, pvp выживание, ваш стоп, your stop, minecraft 1.21, ip сервера, рейды, выживание, майнкрафт">
+    <meta name="author" content="Your Stop Server">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Your Stop Minecraft Server | PvP Выживание">
+    <meta property="og:description" content="⚔️ Уникальный Minecraft сервер с PvP выживанием, рейдами и прокачкой блоков. IP: 5.32.150.26">
+    <meta property="og:url" content="https://genribravo651-cloud.github.io/your-stop/">
+    <meta property="og:image" content="https://genribravo651-cloud.github.io/your-stop/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your Stop Minecraft Server">
+    <meta name="twitter:description" content="⚔️ PvP выживание с рейдами и прокачкой блоков">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GameServer",
+        "name": "Your Stop Minecraft Server",
+        "description": "Minecraft сервер с PvP выживанием, рейдами и системой прокачки блоков",
+        "game": "Minecraft",
+        "playersOnline": 0,
+        "serverStatus": "Online",
+        "gameVersion": "1.21.x",
+        "url": "https://genribravo651-cloud.github.io/your-stop/",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "RU",
+            "ipAddress": "5.32.150.26:25565"
+        },
+        "offers": {
+            "@type": "Offer",
+            "category": "GameServer"
+        }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://api.mcsrvstat.us">
+    
     <style>
         * {
             margin: 0;
@@ -11,297 +59,419 @@
             box-sizing: border-box;
         }
 
-        body {
-            background: linear-gradient(-45deg, #0c0c0c, #1a1a2e, #16213e, #0f3460);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            padding: 20px;
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-red: #ff2a6d;
+            --dark-space: #0a0a16;
+            --card-deep: #111122;
+            --text-glow: 0 0 10px currentColor;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 243, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(185, 103, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(255, 42, 109, 0.08) 0%, transparent 50%),
+                var(--dark-space);
+            color: #e0e0ff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .quantum-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(185, 103, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            padding: 40px;
-            border: 3px solid #ff6b35;
-            box-shadow: 0 0 50px rgba(255, 107, 53, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(17, 17, 34, 0.92);
+            border-radius: 24px;
+            padding: 50px 40px;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 
+                0 0 60px rgba(0, 243, 255, 0.25),
+                inset 0 0 60px rgba(0, 243, 255, 0.08);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scan 4s linear infinite;
         }
 
-        .container > * {
-            animation: fadeIn 0.8s ease-out;
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
-        header {
+        /* Header Styles */
+        .quantum-header {
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #ff6b35;
-            padding-bottom: 30px;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .quantum-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--neon-red), 
+                var(--neon-purple), 
+                var(--neon-cyan), 
+                transparent);
+            border-radius: 2px;
         }
 
         .server-title {
-            font-size: 3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b35, #ff8e53, #ff6b35);
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            text-shadow: var(--text-glow);
+            letter-spacing: 2px;
         }
 
-        .server-tagline {
-            font-size: 1.3em;
-            color: #cccccc;
-            margin-bottom: 20px;
+        .server-subtitle {
+            font-size: 1.4rem;
+            color: #a0a0ff;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .ip-display {
-            background: linear-gradient(45deg, #1a1a2e, #0f3460);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #ff6b35;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(185, 103, 255, 0.1));
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--neon-cyan);
             display: inline-block;
-            margin: 20px 0;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ip-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--neon-cyan), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+
+        .ip-display > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .ip-label {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+            display: block;
         }
 
         .ip-address {
-            font-size: 2em;
-            font-weight: bold;
-            color: #ff6b35;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
             font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
 
         .version-info {
-            color: #888;
-            margin-top: 10px;
-            font-size: 1em;
+            color: #8888ff;
+            margin-top: 15px;
+            font-size: 1rem;
         }
 
+        /* Status Panel */
         .status-panel {
-            background: rgba(255, 107, 53, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            border: 1px solid rgba(255, 107, 53, 0.3);
+            background: rgba(34, 34, 68, 0.6);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            position: relative;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 12px;
+        .panel-title {
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 30px;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 107, 53, 0.2);
+            text-shadow: var(--text-glow);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff6b35;
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        .quantum-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .data-card {
+            background: linear-gradient(145deg, rgba(0, 243, 255, 0.05), rgba(185, 103, 255, 0.05));
+            padding: 30px 25px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .data-card:hover::before {
+            left: 100%;
         }
 
         .stat-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin: 10px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: var(--text-glow);
         }
 
-        .online { color: #4CAF50; }
-        .offline { color: #f44336; }
-        .players { color: #2196F3; }
+        .online { color: var(--neon-cyan); }
+        .offline { color: var(--neon-red); }
+        .players { color: #4dffea; }
+        .performance { color: var(--neon-purple); }
 
         .player-list {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
             border-radius: 12px;
-            margin: 15px 0;
+            margin: 25px 0;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .player-item {
             display: inline-block;
-            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-red));
             color: white;
-            padding: 8px 16px;
-            margin: 5px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
+            padding: 10px 20px;
+            margin: 8px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(185, 103, 255, 0.3);
         }
 
-        .online-chart {
-            margin: 25px 0;
-        }
-
-        .chart-bars {
-            display: flex;
-            justify-content: center;
-            align-items: end;
-            height: 120px;
-            gap: 12px;
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-
-        .bar-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-        }
-
-        .bar {
-            width: 25px;
-            background: linear-gradient(to top, #ff6b35, #ff8e53);
-            border-radius: 5px 5px 0 0;
-            transition: height 0.5s ease;
-            min-height: 10px;
-        }
-
-        .bar-label {
-            margin-top: 8px;
-            font-size: 0.8em;
-            color: #ccc;
-        }
-
-        .features-grid {
+        /* Features Grid */
+        .features-quantum {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
         }
 
-        .feature-card {
-            background: rgba(255, 107, 53, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #ff6b35;
-            transition: transform 0.3s ease;
+        .feature-node {
+            background: rgba(34, 34, 68, 0.7);
+            padding: 30px;
+            border-radius: 16px;
+            border-left: 4px solid var(--neon-cyan);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .feature-card:hover {
-            transform: translateX(5px);
+        .feature-node:hover {
+            transform: translateX(10px);
+            background: rgba(34, 34, 68, 0.9);
         }
 
-        .feature-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
+        .node-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .btn {
-            background: linear-gradient(45deg, #ff6b35, #ff8e53);
+        .node-title {
+            font-size: 1.4rem;
+            color: var(--neon-cyan);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .quantum-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .qbtn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
             color: white;
             border: none;
-            padding: 16px 32px;
-            margin: 8px;
-            border-radius: 10px;
+            padding: 18px 35px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 600;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            min-width: 200px;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        .qbtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
         }
 
-        .pulse-btn {
-            animation: pulse 2s infinite;
+        .qbtn:hover::before {
+            left: 100%;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 107, 53, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+        .qbtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.4);
         }
 
-        .btn-secondary {
-            background: linear-gradient(45deg, #2196F3, #21CBF3);
+        .qbtn-primary {
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-purple));
+            animation: pulse-glow 2s infinite;
         }
 
-        .section-title {
-            font-size: 1.8em;
-            margin: 25px 0 15px 0;
-            color: #ff6b35;
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 42, 109, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 42, 109, 0.8); }
+        }
+
+        /* Additional Sections */
+        .cyber-command {
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.1), rgba(185, 103, 255, 0.1));
+            padding: 30px;
+            border-radius: 16px;
             text-align: center;
+            margin: 35px 0;
+            border: 1px solid var(--neon-red);
         }
 
-        .help-command {
-            background: rgba(255, 107, 53, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px solid #ff6b35;
-        }
-
-        .command {
+        .command-code {
             font-family: 'Courier New', monospace;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px 30px;
             border-radius: 8px;
             display: inline-block;
-            margin: 10px 0;
-            color: #ff6b35;
+            margin: 15px 0;
+            color: var(--neon-cyan);
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.3rem;
+            border: 1px solid var(--neon-cyan);
         }
 
-        .button-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 25px 0;
+        .quantum-tips {
+            background: linear-gradient(135deg, rgba(77, 255, 234, 0.1), rgba(0, 243, 255, 0.1));
+            padding: 30px;
+            border-radius: 16px;
+            margin: 35px 0;
+            border: 1px solid #4dffea;
         }
 
+        /* Notifications */
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            z-index: 1000;
-            animation: slideInRight 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .notification.error {
-            background: #f44336;
-        }
-
-        .notification.warning {
-            background: #ff9800;
+            padding: 20px 25px;
+            border-radius: 12px;
+            z-index: 10000;
+            animation: slideInRight 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
+            border: 1px solid var(--neon-cyan);
         }
 
         @keyframes slideInRight {
@@ -309,219 +479,269 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        .tips-section {
-            background: rgba(255, 193, 7, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #ffc107;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 30px 20px;
+                margin: 10px;
             }
             
             .server-title {
-                font-size: 2.2em;
+                font-size: 2.8rem;
             }
             
-            .stats-grid, .features-grid {
+            .quantum-grid-layout,
+            .features-quantum {
                 grid-template-columns: 1fr;
             }
             
-            .button-group {
+            .quantum-buttons {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .btn {
+            .qbtn {
                 width: 100%;
                 max-width: 300px;
-                margin: 5px 0;
             }
             
-            .chart-bars {
-                gap: 8px;
+            .ip-address {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .server-title {
+                font-size: 2.2rem;
             }
             
-            .bar {
-                width: 20px;
+            .ip-address {
+                font-size: 1.6rem;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .container::before,
+            .data-card::before,
+            .qbtn::before,
+            .particle {
+                animation: none;
+            }
+            
+            .data-card:hover,
+            .feature-node:hover,
+            .qbtn:hover {
+                transform: none;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --neon-cyan: #00ffff;
+                --neon-purple: #ff00ff;
+                --neon-red: #ff0000;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .quantum-grid, .particles, .qbtn, .notification {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 2px solid #000;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Уведомления -->
-    <div id="notifications"></div>
+    <!-- Structured Data for AI -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Как подключиться к серверу Your Stop?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "IP адрес: 5.32.150.26:25565, версия Minecraft: 1.21.x. Поддерживается лицензия и пиратка."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Какие особенности сервера?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PvP выживание, рейды, прокачка блоков, система друзей, телепорты /sethome и /tpa, торговля между игроками."
+            }
+        }]
+    }
+    </script>
 
-    <div class="container">
-        <!-- Заголовок -->
-        <header>
-            <div class="server-title">🎮 YOUR STOP</div>
-            <div class="server-tagline">— свобода, PvP и выживание без границ!</div>
+    <div class="quantum-grid" aria-hidden="true"></div>
+    <div class="particles" id="particles-container" aria-hidden="true"></div>
+
+    <main class="container" role="main">
+        <header class="quantum-header">
+            <h1 class="server-title">YOUR STOP</h1>
+            <p class="server-subtitle" role="doc-subtitle">— Кибер-выживание в эпоху PvP</p>
             
             <div class="ip-display">
-                <div style="font-size: 1.1em; margin-bottom: 10px;">🔗 Подключиться к серверу:</div>
+                <span class="ip-label">🌐 ПОДКЛЮЧЕНИЕ К СЕРВЕРУ</span>
                 <div class="ip-address">5.32.150.26:25565</div>
-                <div class="version-info">📜 Версия: 1.21.x | Лицензия и пиратка</div>
+                <div class="version-info">⚡ Версия: 1.21.x | 🔓 Лицензия и пиратка</div>
             </div>
         </header>
 
-        <!-- Мониторинг в реальном времени -->
-        <div class="status-panel">
-            <h2 class="section-title">📊 Статус сервера</h2>
+        <!-- Server Status -->
+        <section class="status-panel" aria-labelledby="status-title">
+            <h2 id="status-title" class="panel-title">📊 СТАТУС СЕРВЕРА В РЕАЛЬНОМ ВРЕМЕНИ</h2>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div>Статус</div>
+            <div class="quantum-grid-layout">
+                <div class="data-card">
+                    <div>СТАТУС</div>
                     <div class="stat-value" id="serverStatus">🔄</div>
-                    <div id="statusText">Проверяем сервер...</div>
+                    <div id="statusText">Сканирование...</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div>Игроков онлайн</div>
+                <div class="data-card">
+                    <div>ОНЛАЙН</div>
                     <div class="stat-value players" id="onlinePlayers">0/∞</div>
-                    <div>Выживальщиков в бою</div>
+                    <div>Бойцов в системе</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div>Версия</div>
+                <div class="data-card">
+                    <div>ВЕРСИЯ</div>
                     <div class="stat-value" id="serverVersion">1.21.x</div>
-                    <div>Minecraft</div>
+                    <div>Протокол</div>
                 </div>
                 
-                <div class="stat-card">
-                    <div>Производительность</div>
-                    <div class="stat-value" id="serverPerformance">20 TPS</div>
-                    <div>Стабильность</div>
-                </div>
-            </div>
-
-            <!-- График онлайна -->
-            <div class="online-chart">
-                <h3 style="text-align: center; margin-bottom: 15px;">📈 Онлайн за 6 часов</h3>
-                <div class="chart-bars">
-                    <div class="bar-container">
-                        <div class="bar" style="height: 45%"></div>
-                        <div class="bar-label">-5ч</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 60%"></div>
-                        <div class="bar-label">-4ч</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 35%"></div>
-                        <div class="bar-label">-3ч</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 25%"></div>
-                        <div class="bar-label">-2ч</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar" style="height: 40%"></div>
-                        <div class="bar-label">-1ч</div>
-                    </div>
-                    <div class="bar-container">
-                        <div class="bar" id="currentOnlineBar" style="height: 30%"></div>
-                        <div class="bar-label">Сейчас</div>
-                    </div>
+                <div class="data-card">
+                    <div>ПРОИЗВОДИТЕЛЬНОСТЬ</div>
+                    <div class="stat-value performance" id="serverPerformance">20 TPS</div>
+                    <div>Стабильность ядра</div>
                 </div>
             </div>
 
             <div class="player-list">
-                <strong>👥 Сейчас на сервере:</strong>
-                <div id="playerListContainer" style="margin-top: 15px;">
-                    <div id="playerList">Загружаем список выживальщиков...</div>
+                <strong>👥 АКТИВНЫЕ СОЕДИНЕНИЯ:</strong>
+                <div id="playerListContainer">
+                    <div id="playerList">Загрузка данных подключения...</div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 20px; color: #888;">
-                Обновлено: <span id="lastUpdate">--:--:--</span>
-                <button class="btn" onclick="updateServerStatus()" style="padding: 10px 20px; margin-left: 15px;">🔄 Обновить</button>
+            <div style="text-align: center; margin-top: 25px; color: #8888ff;">
+                Последнее обновление: <span id="lastUpdate">--:--:--</span>
+                <button class="qbtn" onclick="updateServerStatus()" style="padding: 12px 24px; margin-left: 20px;">🔄 СКАНИРОВАТЬ</button>
             </div>
-        </div>
+        </section>
 
-        <!-- Кнопки действий -->
-        <div class="button-group">
-            <button class="btn pulse-btn" onclick="launchGame()">🎮 ИГРАТЬ СЕЙЧАС</button>
-            <button class="btn" onclick="copyIP()">📋 Скопировать IP</button>
-            <button class="btn btn-secondary" onclick="showInstructions()">📖 Инструкция</button>
-        </div>
+        <!-- Action Buttons -->
+        <nav class="quantum-buttons" aria-label="Основные действия">
+            <button class="qbtn qbtn-primary" onclick="launchGame()">🎮 АКТИВИРОВАТЬ ПОДКЛЮЧЕНИЕ</button>
+            <button class="qbtn" onclick="copyIP()">📋 КОПИРОВАТЬ IP</button>
+            <button class="qbtn" onclick="showInstructions()">📖 РУКОВОДСТВО</button>
+        </nav>
 
-        <!-- Особенности сервера -->
-        <h2 class="section-title">🧱 Особенности сервера</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚔️</div>
-                <h3>Реалистичное выживание</h3>
-                <p>Блоки имеют HP и прокачиваются, как в Rust</p>
+        <!-- Server Features -->
+        <section aria-labelledby="features-title">
+            <h2 id="features-title" class="panel-title" style="text-align: center; margin: 50px 0 30px 0;">🚀 СИСТЕМНЫЕ МОДУЛИ</h2>
+            <div class="features-quantum">
+                <article class="feature-node">
+                    <span class="node-icon">⚡</span>
+                    <h3 class="node-title">КИБЕР-ВЫЖИВАНИЕ</h3>
+                    <p>Блоки обладают HP и поддаются прокачке. Реалистичная система разрушения и укрепления.</p>
+                </article>
+                
+                <article class="feature-node">
+                    <span class="node-icon">🛡️</span>
+                    <h3 class="node-title">СИСТЕМА РЕЙДОВ</h3>
+                    <p>Стройте укрепленные базы, защищайтесь от атак. Динамические PvP сражения.</p>
+                </article>
+                
+                <article class="feature-node">
+                    <span class="node-icon">🌐</span>
+                    <h3 class="node-title">СЕТЕВЫЕ ТЕЛЕПОРТЫ</h3>
+                    <p>/sethome и /tpa - мгновенное перемещение по координатам.</p>
+                </article>
+                
+                <article class="feature-node">
+                    <span class="node-icon">💎</span>
+                    <h3 class="node-title">ЭКОНОМИЧЕСКАЯ СИСТЕМА</h3>
+                    <p>Торговля между игроками через защищенный GUI интерфейс.</p>
+                </article>
+                
+                <article class="feature-node">
+                    <span class="node-icon">📈</span>
+                    <h3 class="node-title">ПРОГРЕССИЯ</h3>
+                    <p>Киты, ранги, система развития. Постоянное совершенствование.</p>
+                </article>
+                
+                <article class="feature-node">
+                    <span class="node-icon">🤝</span>
+                    <h3 class="node-title">СОЦИАЛЬНАЯ СЕТЬ</h3>
+                    <p>Система друзей, кланы, альянсы. Играйте командой.</p>
+                </article>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🏰</div>
-                <h3>Рейды и базы</h3>
-                <p>Строй укрепления, защищайся от рейдеров</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">✨</div>
-                <h3>Минимум плагинов</h3>
-                <p>Максимум атмосферы выживания</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h3>Удобные телепорты</h3>
-                <p>/sethome и /tpa для быстрого перемещения</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Торговля</h3>
-                <p>Честная торговля между игроками через GUI</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">⭐</div>
-                <h3>Прогрессия</h3>
-                <p>Киты и ранги с системой развития</p>
-            </div>
-        </div>
+        </section>
 
-        <!-- Советы -->
-        <div class="tips-section">
-            <h3 style="color: #ffc107; margin-bottom: 15px;">💡 Советы для новичков</h3>
-            <div id="randomTip" style="font-size: 1.1em; margin-bottom: 15px;">
-                Используйте /yshelp чтобы узнать все команды сервера!
-            </div>
-            <button class="btn" onclick="showNewTip()" style="background: #ffc107; color: #000;">
-                🔄 Новый совет
-            </button>
-        </div>
+        <!-- Help Command -->
+        <section class="cyber-command" aria-labelledby="help-title">
+            <h3 id="help-title">❓ ТРЕБУЕТСЯ ТЕХПОДДЕРЖКА?</h3>
+            <p>Используйте системную команду:</p>
+            <div class="command-code">/yshelp</div>
+            <p>Для доступа ко всем возможностям системы</p>
+        </section>
 
-        <!-- Команда помощи -->
-        <div class="help-command">
-            <h3>❓ Нужна помощь?</h3>
-            <p>Напиши в чате игры:</p>
-            <div class="command">/yshelp</div>
-            <p>Чтобы разобраться во всех возможностях сервера</p>
-        </div>
+        <!-- Additional Actions -->
+        <nav class="quantum-buttons" aria-label="Дополнительные действия">
+            <button class="qbtn" onclick="showRules()">📜 ПРОТОКОЛ СИСТЕМЫ</button>
+            <button class="qbtn" onclick="openDiscord()">💬 КОММУНИКАЦИЯ</button>
+            <button class="qbtn" onclick="openShop()">🛒 ТОРГОВАЯ ПЛАТФОРМА</button>
+        </nav>
+    </main>
 
-        <!-- Дополнительные кнопки -->
-        <div class="button-group">
-            <button class="btn btn-secondary" onclick="showRules()">📜 Правила</button>
-            <button class="btn btn-secondary" onclick="openDiscord()">💬 Discord</button>
-            <button class="btn btn-secondary" onclick="openShop()">🛒 Магазин</button>
-        </div>
-    </div>
+    <div id="notifications" aria-live="polite" aria-atomic="true"></div>
 
     <script>
-        // Конфигурация сервера
+        // SEO: Page load performance
+        window.addEventListener('load', function() {
+            // Mark page as fully loaded for SEO
+            if (window.performance) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                console.log('Page load time:', pageLoadTime + 'ms');
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Server configuration
         const SERVER_IP = '5.32.150.26';
         const SERVER_PORT = '25565';
 
-        // Элементы DOM
+        // DOM elements
         const elements = {
             serverStatus: document.getElementById('serverStatus'),
             statusText: document.getElementById('statusText'),
@@ -532,34 +752,14 @@
             serverPerformance: document.getElementById('serverPerformance')
         };
 
-        // Статистика
         let serverOnline = false;
-        let maxOnlineToday = 0;
 
-        // Советы для игроков
-        const tips = [
-            "Используйте /sethome чтобы установить дом!",
-            "Торгуйте с игроками через торговый интерфейс",
-            "Укрепляйте стены базы прочными блоками",
-            "Используйте /tpa для быстрого перемещения к друзьям",
-            "Объединяйтесь в кланы для лучшей защиты",
-            "Исследуйте мир в поисках редких ресурсов",
-            "Не забывайте про систему прокачки блоков!",
-            "Используйте /friend чтобы добавить друзей"
-        ];
-
-        // Показать случайный совет
-        function showNewTip() {
-            const randomTip = tips[Math.floor(Math.random() * tips.length)];
-            document.getElementById('randomTip').textContent = randomTip;
-            showNotification('💡 Новый совет загружен!', 'success');
-        }
-
-        // Показать уведомление
+        // Show notification
         function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
+            notification.className = 'notification';
             notification.textContent = message;
+            notification.setAttribute('role', 'alert');
             document.getElementById('notifications').appendChild(notification);
             
             setTimeout(() => {
@@ -567,19 +767,11 @@
             }, 4000);
         }
 
-        // Обновить график онлайна
-        function updateOnlineChart(onlinePlayers) {
-            const maxPlayers = 50;
-            const percentage = Math.min((onlinePlayers / maxPlayers) * 100, 100);
-            document.getElementById('currentOnlineBar').style.height = percentage + '%';
-            document.getElementById('currentOnlineBar').title = onlinePlayers + ' игроков';
-        }
-
-        // Основная функция обновления статуса
+        // Update server status
         async function updateServerStatus() {
             try {
                 elements.serverStatus.innerHTML = '🔄';
-                elements.statusText.textContent = 'Проверяем сервер...';
+                elements.statusText.textContent = 'Сканирование сети...';
                 
                 const response = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}:${SERVER_PORT}`);
                 const data = await response.json();
@@ -588,21 +780,12 @@
                     serverOnline = true;
                     elements.serverStatus.innerHTML = '🟢 ОНЛАЙН';
                     elements.serverStatus.className = 'stat-value online';
-                    elements.statusText.textContent = 'Сервер готов к бою!';
+                    elements.statusText.textContent = 'Система активна';
                     
                     const online = data.players?.online || 0;
                     const max = data.players?.max || '∞';
-                    
-                    // Обновляем онлайн
                     elements.onlinePlayers.textContent = `${online}/${max}`;
-                    updateOnlineChart(online);
                     
-                    // Обновляем максимум
-                    if (online > maxOnlineToday) {
-                        maxOnlineToday = online;
-                    }
-                    
-                    // Список игроков
                     if (data.players?.list && data.players.list.length > 0) {
                         elements.playerList.innerHTML = '';
                         data.players.list.forEach(player => {
@@ -612,60 +795,78 @@
                             elements.playerList.appendChild(playerElement);
                         });
                     } else {
-                        elements.playerList.innerHTML = '<em>Стань первым выживальщиком!</em>';
+                        elements.playerList.innerHTML = '<em>Ожидание подключений...</em>';
                     }
                     
-                    // Версия
                     elements.serverVersion.textContent = data.version || '1.21.x';
-                    
-                    // Производительность (всегда 20 TPS для онлайн сервера)
                     elements.serverPerformance.textContent = '20 TPS';
                     
-                    showNotification('✅ Сервер онлайн!', 'success');
+                    // Update structured data
+                    updateStructuredData(online, 'Online');
+                    
+                    showNotification('✅ Подключение установлено', 'success');
                     
                 } else {
                     serverOnline = false;
                     elements.serverStatus.innerHTML = '🔴 ОФФЛАЙН';
                     elements.serverStatus.className = 'stat-value offline';
-                    elements.statusText.textContent = 'Сервер на технических работах';
+                    elements.statusText.textContent = 'Техническое обслуживание';
                     elements.onlinePlayers.textContent = '0/∞';
-                    elements.playerList.innerHTML = '<em>Подождите немного...</em>';
+                    elements.playerList.innerHTML = '<em>Система недоступна</em>';
                     elements.serverPerformance.textContent = '0 TPS';
-                    updateOnlineChart(0);
+                    
+                    updateStructuredData(0, 'Offline');
                 }
                 
                 elements.lastUpdate.textContent = new Date().toLocaleTimeString();
                 
             } catch (error) {
-                console.error('Ошибка мониторинга:', error);
+                console.error('Monitoring error:', error);
                 elements.serverStatus.innerHTML = '❌ ОШИБКА';
-                elements.statusText.textContent = 'Не удалось проверить сервер';
-                showNotification('❌ Ошибка проверки сервера', 'error');
+                elements.statusText.textContent = 'Сбой сканирования';
+                showNotification('❌ Ошибка сетевого сканирования', 'error');
             }
         }
 
-        // Запуск игры
+        // Update structured data for SEO
+        function updateStructuredData(playersOnline, status) {
+            const script = document.querySelector('script[type="application/ld+json"]');
+            if (script) {
+                const data = JSON.parse(script.textContent);
+                data.playersOnline = playersOnline;
+                data.serverStatus = status;
+                script.textContent = JSON.stringify(data, null, 2);
+            }
+        }
+
+        // Launch game
         function launchGame() {
             if (!serverOnline) {
-                showNotification('⚠️ Сервер сейчас недоступен', 'warning');
+                showNotification('⚠️ Система временно недоступна', 'warning');
                 return;
             }
             
-            // Пытаемся открыть через minecraft:// ссылку
+            // Track analytics event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_launch', {
+                    'event_category': 'engagement',
+                    'event_label': 'Your Stop Server'
+                });
+            }
+            
             window.location.href = `minecraft://?server=${SERVER_IP}&port=${SERVER_PORT}`;
             
-            // Инструкция если не сработало
             setTimeout(() => {
                 const userChoice = confirm(
-                    '🎮 ПОДКЛЮЧЕНИЕ К YOUR STOP\n\n' +
-                    'Если Minecraft не запустился:\n' +
-                    '1. Откройте Minecraft 1.21.x\n' +
-                    '2. Нажмите "Сетевая игра"\n' + 
-                    '3. Нажмите "Добавить сервер"\n' +
-                    '4. Введите данные:\n\n' +
+                    '🎮 АКТИВАЦИЯ ПРОТОКОЛА ПОДКЛЮЧЕНИЯ\n\n' +
+                    'Если автоматическое подключение не сработало:\n' +
+                    '1. Запустите Minecraft 1.21.x\n' +
+                    '2. Перейдите в "Сетевая игра"\n' + 
+                    '3. Выберите "Добавить сервер"\n' +
+                    '4. Введите параметры:\n\n' +
                     `   Адрес: ${SERVER_IP}\n` +
                     '   Порт: 25565\n\n' +
-                    'Показать подробную инструкцию?'
+                    'Показать детальную инструкцию?'
                 );
                 
                 if (userChoice) {
@@ -674,82 +875,82 @@
             }, 2000);
         }
 
-        // Копирование IP
+        // Copy IP to clipboard
         async function copyIP() {
             const ipText = `${SERVER_IP}:${SERVER_PORT}`;
             
             try {
                 await navigator.clipboard.writeText(ipText);
-                showNotification('✅ IP скопирован в буфер обмена!', 'success');
+                showNotification('✅ IP скопирован в буфер', 'success');
             } catch (err) {
-                // Fallback для старых браузеров
                 const textArea = document.createElement('textarea');
                 textArea.value = ipText;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
-                showNotification('✅ IP скопирован: ' + ipText, 'success');
+                showNotification('✅ IP адрес: ' + ipText, 'success');
             }
         }
 
-        // Инструкция
+        // Show instructions
         function showInstructions() {
             const instructions = `
-🎮 КАК ПОДКЛЮЧИТЬСЯ К YOUR STOP:
+🎮 ПРОТОКОЛ ПОДКЛЮЧЕНИЯ YOUR STOP:
 
-1. ЗАПУСТИТЕ MINECRAFT 1.21.x
-   - Поддерживается лицензия и пиратка
+1. АКТИВАЦИЯ КЛИЕНТА
+   - Запустите Minecraft версии 1.21.x
+   - Поддерживаются все типы лицензий
 
-2. ДОБАВЬТЕ СЕРВЕР:
-   - Нажмите "Сетевая игра"
-   - "Добавить сервер"
-   - Введите данные:
+2. КОНФИГУРАЦИЯ СЕРВЕРА
+   - Откройте раздел "Сетевая игра"
+   - Нажмите "Добавить сервер"
+   - Введите параметры подключения:
 
-   📍 Адрес сервера: ${SERVER_IP}
-   🔢 Порт: ${SERVER_PORT}
+   🌐 Адрес сервера: ${SERVER_IP}
+   🔧 Порт: ${SERVER_PORT}
 
-3. НАЧНИТЕ ИГРУ!
+3. ИНИЦИАЛИЗАЦИЯ
    - Нажмите "Подключиться"
-   - Наслаждайтесь выживанием!
+   - Дождитесь синхронизации
 
-🎯 ПЕРВЫЕ ШАГИ НА СЕРВЕРЕ:
-- Напишите /yshelp - все команды
-- Найдите друзей - /friend
-- Постройте первую базу
-- Укрепляйте стены от рейдеров
+⚡ ПЕРВИЧНЫЕ ДЕЙСТВИЯ:
+- Используйте /yshelp - все команды системы
+- Настройте /sethome для быстрого перемещения
+- Изучите систему торговли
+- Укрепляйте базу от рейдов
 
-УДАЧНОЙ ИГРЫ! 🏰
+УСПЕШНОГО ВЫЖИВАНИЯ! 🛡️
             `;
             alert(instructions);
         }
 
-        // Правила сервера
+        // Show rules
         function showRules() {
             const rules = `
-📜 ПРАВИЛА YOUR STOP:
+📜 СИСТЕМНЫЙ ПРОТОКОЛ YOUR STOP:
 
 ⚔️ PvP И ВЫЖИВАНИЕ:
-• Разрешены рейды и PvP
-• Гриферство - часть игры
-• Укрепляйте свои базы
+• Рейды и PvP разрешены
+• Гриферство - часть игрового процесса
+• Стройте укрепленные базы
 
-🚫 ЗАПРЕЩЕНО:
-• Читы и макросы
-• Оскорбления и спам
-• Баги и эксплойты
+🚫 ЗАПРЕЩЕННЫЕ ДЕЙСТВИЯ:
+• Использование читов и макросов
+• Оскорбления и спам в чате
+• Эксплуатация багов системы
 
-✅ РАЗРЕШЕНО:
-• Объединяться в кланы
-• Торговать с игроками  
-• Строить любые конструкции
+✅ РАЗРЕШЕННЫЕ ОПЕРАЦИИ:
+• Создание кланов и альянсов
+• Торговля между игроками
+• Любое строительство
 
-Нарушение = бан без предупреждения!
+Нарушение протокола = блокировка доступа!
             `;
             alert(rules);
         }
 
-        // Социальные ссылки (замените на реальные)
+        // Social links
         function openDiscord() {
             window.open('https://discord.gg/ВАШ_DISCORD', '_blank');
         }
@@ -758,19 +959,29 @@
             window.open('/shop', '_blank');
         }
 
-        // Инициализация
+        // Initialize
         function init() {
+            createParticles();
             updateServerStatus();
             
-            // Авто-обновление каждые 30 секунд
+            // Auto-update every 30 seconds
             setInterval(updateServerStatus, 30000);
             
-            // Показываем случайный совет при загрузке
-            showNewTip();
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const notifications = document.getElementById('notifications');
+                    notifications.innerHTML = '';
+                }
+            });
         }
 
-        // Запуск при загрузке
-        document.addEventListener('DOMContentLoaded', init);
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
