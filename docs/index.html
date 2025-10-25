@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOUR STOP - Лучший сервер выживания Minecraft | yourstop.online</title>
-    <meta name="description" content="Присоединяйтесь к YOUR STOP - лучшему серверу выживания Minecraft с уникальными модами, дружным комьюнити и захватывающим геймплеем.">
-    <meta name="keywords" content="minecraft сервер, выживание minecraft, ваш стоп, your stop, minecraft выживание, minecraft multiplayer, вашстоп, yourstop.online">
+    <title>YOUR STOP - Классический сервер выживания Minecraft | yourstop.online</title>
+    <meta name="description" content="Классический сервер выживания Minecraft YOUR STOP. Присоединяйтесь к нашему сообществу и наслаждайтесь ванильным геймплеем с системой защиты построек.">
+    <meta name="keywords" content="minecraft сервер, выживание minecraft, ваш стоп, your stop, minecraft выживание, minecraft multiplayer, вашстоп, yourstop.online, классический minecraft">
     <style>
         * {
             margin: 0;
@@ -125,25 +125,39 @@
             opacity: 0.9;
         }
 
+        .ip-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
         .ip-address {
             background-color: rgba(76, 175, 80, 0.2);
             border: 2px solid var(--primary);
-            border-radius: 8px;
+            border-radius: 8px 0 0 8px;
             padding: 15px 30px;
-            display: inline-block;
-            margin: 20px 0;
             font-size: 24px;
             font-weight: bold;
             letter-spacing: 1px;
             box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
         }
 
-        .ip-address:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        .copy-button {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .copy-button:hover {
+            background-color: var(--primary-dark);
         }
 
         .copy-notification {
@@ -325,9 +339,80 @@
             color: #aaa;
         }
 
+        .status-online {
+            color: #4CAF50;
+        }
+
+        .status-offline {
+            color: #f44336;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Commands Section */
+        .commands {
+            padding: 100px 0;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .command-category {
+            background-color: rgba(13, 27, 42, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .command-category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .command-category h3 span {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .command-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .command-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .command {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .command-desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
         /* How to Join Section */
         .how-to-join {
             padding: 100px 0;
+            background-color: var(--dark-light);
         }
 
         .steps {
@@ -361,7 +446,6 @@
         /* Community Section */
         .community {
             padding: 80px 0;
-            background-color: var(--dark-light);
             text-align: center;
         }
 
@@ -480,8 +564,13 @@
             }
 
             .ip-address {
-                font-size: 20px;
-                padding: 12px 24px;
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+
+            .copy-button {
+                font-size: 16px;
+                padding: 12px 15px;
             }
 
             .section-title h2 {
@@ -503,7 +592,7 @@
                     <ul>
                         <li><a href="#home">Главная</a></li>
                         <li><a href="#features">Особенности</a></li>
-                        <li><a href="#info">О сервере</a></li>
+                        <li><a href="#commands">Команды</a></li>
                         <li><a href="#live">Статистика</a></li>
                         <li><a href="#join">Как присоединиться</a></li>
                         <li><a href="#community">Сообщество</a></li>
@@ -518,12 +607,13 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Добро пожаловать на YOUR STOP</h2>
-                <p>Лучший сервер выживания в Minecraft с уникальными модами, дружным сообществом и захватывающим геймплеем!</p>
-                <div class="ip-address" id="server-ip">
-                    yourstop.online
-                    <div class="copy-notification" id="copy-notification">Скопировано!</div>
+                <h2>Классический выживание в Minecraft</h2>
+                <p>YOUR STOP - сервер с системой защиты построек, где вы можете наслаждаться ванильным геймплеем без гриферов</p>
+                <div class="ip-container">
+                    <div class="ip-address">yourstop.online</div>
+                    <button class="copy-button" id="copy-button-main">Копировать</button>
                 </div>
+                <div class="copy-notification" id="copy-notification">Скопировано в буфер обмена!</div>
                 <a href="#join" class="cta-button">Присоединиться сейчас</a>
             </div>
         </div>
@@ -534,13 +624,13 @@
         <div class="container">
             <div class="section-title">
                 <h2>Почему именно наш сервер?</h2>
-                <p>Уникальные особенности, которые делают YOUR STOP лучшим выбором для игры в Minecraft</p>
+                <p>Классический Minecraft с удобной системой защиты ваших построек</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">⚔️</div>
-                    <h3>Уникальные моды</h3>
-                    <p>Эксклюзивные модификации, которые делают геймплей еще интереснее и разнообразнее</p>
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Защита построек</h3>
+                    <p>Система защиты блоков от гриферов с возможностью добавлять друзей</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">👥</div>
@@ -548,9 +638,9 @@
                     <p>Дружная и активная команда игроков, готовых помочь новичкам</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Защита от гриферов</h3>
-                    <p>Надежная система защиты, которая предотвращает вандализм и читерство</p>
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Классический геймплей</h3>
+                    <p>Чистый ванильный Minecraft без лишних модификаций</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🚀</div>
@@ -558,46 +648,71 @@
                     <p>Мощный хостинг обеспечивает стабильную работу без лагов</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
-                    <h3>Регулярные ивенты</h3>
-                    <p>Увлекательные события и конкурсы с ценными призами</p>
-                </div>
-                <div class="feature-card">
                     <div class="feature-icon">🌍</div>
                     <h3>Огромный мир</h3>
                     <p>Неограниченная карта для исследования и строительства</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏪</div>
+                    <h3>Глобальный рынок</h3>
+                    <p>Торгуйте с другими игроками через удобную систему рынка</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Server Info Section -->
-    <section class="server-info" id="info">
+    <!-- Commands Section -->
+    <section class="commands" id="commands">
         <div class="container">
-            <div class="info-container">
-                <div class="server-stats">
-                    <div class="stat">
-                        <div class="stat-number">24/7</div>
-                        <p>Работа сервера</p>
+            <div class="section-title">
+                <h2>Команды сервера</h2>
+                <p>Все необходимые команды для комфортной игры</p>
+            </div>
+            <div class="commands-grid">
+                <div class="command-category">
+                    <h3><span>🔨</span> Защита построек</h3>
+                    <div class="command-item">
+                        <div class="command">/build</div>
+                        <div class="command-desc">Режим строительства. Все поставленные блоки становятся защищёнными</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">100+</div>
-                        <p>Активных игроков</p>
+                    <div class="command-item">
+                        <div class="command">/repair</div>
+                        <div class="command-desc">Режим ремонта. ПКМ по защищённому блоку восстанавливает его HP</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">1.19+</div>
-                        <p>Версия Minecraft</p>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">0%</div>
-                        <p>Даунтайма</p>
+                    <div class="command-item">
+                        <div class="command">/remove</div>
+                        <div class="command-desc">Режим снятия защиты. ПКМ по защищённому блоку снимает защиту</div>
                     </div>
                 </div>
-                <div class="server-description">
-                    <h2>О сервере YOUR STOP</h2>
-                    <p>YOUR STOP - это качественный сервер выживания в Minecraft, созданный для истинных ценителей этого жанра. Мы предлагаем уникальный опыт игры с тщательно подобранными модами, которые добавляют новые измерения геймплея, не нарушая баланс ванильного Minecraft.</p>
-                    <p>Наше сообщество - это наша гордость. Мы создали дружелюбную атмосферу, где каждый игрок чувствует себя частью большой семьи. Регулярные ивенты, конкурсы строительства и PvP-сражения не дадут вам заскучать!</p>
-                    <p>Присоединяйтесь к нам и станьте частью этого удивительного мира!</p>
+                <div class="command-category">
+                    <h3><span>🔐</span> Пароли и доступ</h3>
+                    <div class="command-item">
+                        <div class="command">/password set &lt;код&gt;</div>
+                        <div class="command-desc">Установить пароль на блок</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">/password enter &lt;код&gt;</div>
+                        <div class="command-desc">Ввести пароль для доступа к блоку</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">/lock &lt;пароль&gt;</div>
+                        <div class="command-desc">Защита дверей паролем (включая двойные)</div>
+                    </div>
+                </div>
+                <div class="command-category">
+                    <h3><span>🤝</span> Социальные команды</h3>
+                    <div class="command-item">
+                        <div class="command">/friend add &lt;ник&gt;</div>
+                        <div class="command-desc">Добавить друга в список доверенных</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">/tpa &lt;ник&gt;</div>
+                        <div class="command-desc">Отправить запрос на телепорт к игроку</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command">/market</div>
+                        <div class="command-desc">Открыть глобальный рынок для торговли</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -636,6 +751,9 @@
                     </div>
                 </div>
             </div>
+            <div class="last-updated" id="last-updated">
+                Обновляется...
+            </div>
         </div>
     </section>
 
@@ -669,9 +787,9 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
-                <div class="ip-address" id="server-ip-2">
-                    yourstop.online
-                    <div class="copy-notification">Скопировано!</div>
+                <div class="ip-container">
+                    <div class="ip-address">yourstop.online</div>
+                    <button class="copy-button" id="copy-button-footer">Копировать</button>
                 </div>
             </div>
         </div>
@@ -681,7 +799,7 @@
     <section class="community" id="community">
         <div class="container">
             <h2>Присоединяйтесь к нашему сообществу</h2>
-            <p>Общайтесь с другими игроками, узнавайте о новостях сервера и участвуйте в обсуждениях</p>
+            <p>Общайтесь с другими игрокми, узнавайте о новостях сервера и участвуйте в обсуждениях</p>
             <a href="https://t.me/yourstopmine" class="telegram-button" target="_blank">
                 <span class="telegram-icon">📢</span>
                 Наш Telegram-канал
@@ -695,13 +813,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>YOUR STOP</h3>
-                    <p>Лучший сервер выживания в Minecraft с уникальным геймплеем и дружным сообществом.</p>
+                    <p>Классический сервер выживания в Minecraft с системой защиты построек и дружным сообществом.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Быстрые ссылки</h3>
                     <a href="#home">Главная</a>
                     <a href="#features">Особенности</a>
-                    <a href="#info">О сервере</a>
+                    <a href="#commands">Команды</a>
                     <a href="#live">Статистика</a>
                     <a href="#join">Как присоединиться</a>
                 </div>
@@ -748,11 +866,11 @@
         });
 
         // Copy IP address functionality
-        function setupCopyIP(elementId) {
-            const ipElement = document.getElementById(elementId);
-            const notification = ipElement.querySelector('.copy-notification');
+        function setupCopyIP(buttonId) {
+            const copyButton = document.getElementById(buttonId);
+            const notification = document.getElementById('copy-notification');
             
-            ipElement.addEventListener('click', function() {
+            copyButton.addEventListener('click', function() {
                 const textToCopy = 'yourstop.online';
                 
                 // Using the modern Clipboard API
@@ -784,54 +902,137 @@
             });
         }
 
-        // Initialize copy functionality for both IP elements
-        setupCopyIP('server-ip');
-        setupCopyIP('server-ip-2');
+        // Initialize copy functionality for both buttons
+        setupCopyIP('copy-button-main');
+        setupCopyIP('copy-button-footer');
 
-        // Server status simulation (in a real scenario, you would fetch this from an API)
-        function updateServerStatus() {
-            // Simulate API call delay
-            setTimeout(() => {
-                // Online players (random between 20 and 100 for demo)
-                const onlinePlayers = Math.floor(Math.random() * 80) + 20;
-                document.getElementById('online-players').innerHTML = onlinePlayers;
-                
-                // Max players
-                document.getElementById('max-players').innerHTML = '150';
-                
-                // Server version
-                document.getElementById('server-version').innerHTML = '1.19.4';
-                
-                // Server status
-                document.getElementById('server-status').innerHTML = '<span style="color: #4CAF50;">● Онлайн</span>';
-            }, 1000);
-        }
-
-        // Update server status on page load
-        document.addEventListener('DOMContentLoaded', updateServerStatus);
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Server status cache
+        let serverStatusCache = {
+            data: null,
+            timestamp: 0,
+            ttl: 30000 // 30 seconds cache
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        // Multiple API endpoints for redundancy
+        const API_ENDPOINTS = [
+            'https://api.mcsrvstat.us/2/yourstop.online',
+            'https://api.mcsrvstat.us/3/yourstop.online',
+            'https://api.mcstatus.io/v2/status/java/yourstop.online'
+        ];
 
-        // Observe elements for animation
-        document.querySelectorAll('.feature-card, .stat, .step, .live-stat').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+        // Fetch server status with multiple fallbacks
+        async function fetchServerStatus() {
+            // Check cache first
+            const now = Date.now();
+            if (serverStatusCache.data && (now - serverStatusCache.timestamp) < serverStatusCache.ttl) {
+                updateUI(serverStatusCache.data);
+                return;
+            }
+
+            let success = false;
+            
+            // Try each API endpoint until one works
+            for (const endpoint of API_ENDPOINTS) {
+                try {
+                    console.log(`Trying API: ${endpoint}`);
+                    const response = await fetch(endpoint, {
+                        signal: AbortSignal.timeout(5000) // 5 second timeout
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        
+                        // Process data based on API format
+                        const processedData = processApiData(data, endpoint);
+                        
+                        // Update cache
+                        serverStatusCache = {
+                            data: processedData,
+                            timestamp: now,
+                            ttl: 30000
+                        };
+                        
+                        updateUI(processedData);
+                        success = true;
+                        break;
+                    }
+                } catch (error) {
+                    console.log(`API ${endpoint} failed:`, error);
+                    continue;
+                }
+            }
+
+            if (!success) {
+                // All APIs failed, use cached data or show error
+                if (serverStatusCache.data) {
+                    updateUI(serverStatusCache.data);
+                    document.getElementById('last-updated').textContent = 'Данные могут быть устаревшими (используется кеш)';
+                } else {
+                    showErrorState();
+                }
+            }
+        }
+
+        // Process data from different API formats
+        function processApiData(data, endpoint) {
+            if (endpoint.includes('mcsrvstat.us')) {
+                return {
+                    online: data.online,
+                    players: data.players ? data.players.online : 0,
+                    maxPlayers: data.players ? data.players.max : 0,
+                    version: data.version || '1.19+',
+                    hostname: data.hostname || 'yourstop.online'
+                };
+            } else if (endpoint.includes('mcstatus.io')) {
+                return {
+                    online: data.online,
+                    players: data.players ? data.players.online : 0,
+                    maxPlayers: data.players ? data.players.max : 0,
+                    version: data.version ? data.version.name : '1.19+',
+                    hostname: data.host || 'yourstop.online'
+                };
+            }
+            
+            return {
+                online: false,
+                players: 0,
+                maxPlayers: 0,
+                version: '1.19+',
+                hostname: 'yourstop.online'
+            };
+        }
+
+        // Update UI with server data
+        function updateUI(data) {
+            if (data.online) {
+                document.getElementById('online-players').innerHTML = data.players;
+                document.getElementById('max-players').innerHTML = data.maxPlayers;
+                document.getElementById('server-version').innerHTML = data.version;
+                document.getElementById('server-status').innerHTML = '<span class="status-online">● Онлайн</span>';
+            } else {
+                document.getElementById('online-players').innerHTML = '0';
+                document.getElementById('max-players').innerHTML = data.maxPlayers || '?';
+                document.getElementById('server-version').innerHTML = data.version;
+                document.getElementById('server-status').innerHTML = '<span class="status-offline">● Офлайн</span>';
+            }
+            
+            // Update timestamp
+            const now = new Date();
+            document.getElementById('last-updated').textContent = 
+                `Обновлено: ${now.toLocaleTimeString()}`;
+        }
+
+        // Show error state
+        function showErrorState() {
+            document.getElementById('online-players').innerHTML = '?';
+            document.getElementById('max-players').innerHTML = '?';
+            document.getElementById('server-version').innerHTML = '1.19+';
+            document.getElementById('server-status').innerHTML = '<span class="status-offline">Ошибка загрузки</span>';
+            document.getElementById('last-updated').textContent = 'Не удалось загрузить данные';
+        }
+
+        // Update server status on page load and periodically
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchServerStatus();
+            // Update every 30 seconds
+            setInterval(fetchServerStatus, 300
