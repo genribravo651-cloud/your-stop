@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YOUR STOP - Лучший сервер выживания Minecraft | yourstop.online</title>
-    <meta name="description" content="Присоединяйтесь к YOUR STOP - лучшему серверу выживания Minecraft с уникальными модами, дружным комьюнити и захватывающим геймплеем. IP: yourstop.online">
+    <meta name="description" content="Присоединяйтесь к YOUR STOP - лучшему серверу выживания Minecraft с уникальными модами, дружным комьюнити и захватывающим геймплеем.">
     <meta name="keywords" content="minecraft сервер, выживание minecraft, ваш стоп, your stop, minecraft выживание, minecraft multiplayer, вашстоп, yourstop.online">
     <style>
         * {
@@ -137,11 +137,31 @@
             letter-spacing: 1px;
             box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
             transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
         }
 
         .ip-address:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .copy-notification {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
         }
 
         .cta-button {
@@ -263,41 +283,46 @@
             opacity: 0.9;
         }
 
-        /* Gallery Section */
-        .gallery {
-            padding: 100px 0;
+        /* Live Data Section */
+        .live-data {
+            padding: 80px 0;
             background-color: var(--dark-light);
         }
 
-        .gallery-grid {
+        .live-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
+            margin-top: 40px;
         }
 
-        .gallery-item {
-            height: 200px;
+        .live-stat {
+            background-color: rgba(13, 27, 42, 0.7);
             border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(76, 175, 80, 0.1);
             transition: all 0.3s;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        .live-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
+        .live-stat h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        .live-stat-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .loading {
+            color: #aaa;
         }
 
         /* How to Join Section */
@@ -331,6 +356,50 @@
             margin: 0 auto 20px;
             font-size: 24px;
             font-weight: bold;
+        }
+
+        /* Community Section */
+        .community {
+            padding: 80px 0;
+            background-color: var(--dark-light);
+            text-align: center;
+        }
+
+        .community h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .community p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0088cc;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .telegram-button:hover {
+            background-color: #0077b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+        }
+
+        .telegram-icon {
+            margin-right: 10px;
+            font-size: 20px;
         }
 
         /* Footer */
@@ -377,6 +446,25 @@
         @media (max-width: 768px) {
             .header-content nav {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .header-content nav.active {
+                display: block;
+            }
+
+            .header-content nav ul {
+                flex-direction: column;
+            }
+
+            .header-content nav ul li {
+                margin: 10px 0;
             }
 
             .mobile-menu {
@@ -416,8 +504,9 @@
                         <li><a href="#home">Главная</a></li>
                         <li><a href="#features">Особенности</a></li>
                         <li><a href="#info">О сервере</a></li>
-                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#live">Статистика</a></li>
                         <li><a href="#join">Как присоединиться</a></li>
+                        <li><a href="#community">Сообщество</a></li>
                     </ul>
                 </nav>
                 <div class="mobile-menu">☰</div>
@@ -431,7 +520,10 @@
             <div class="hero-content">
                 <h2>Добро пожаловать на YOUR STOP</h2>
                 <p>Лучший сервер выживания в Minecraft с уникальными модами, дружным сообществом и захватывающим геймплеем!</p>
-                <div class="ip-address">IP: yourstop.online</div>
+                <div class="ip-address" id="server-ip">
+                    yourstop.online
+                    <div class="copy-notification" id="copy-notification">Скопировано!</div>
+                </div>
                 <a href="#join" class="cta-button">Присоединиться сейчас</a>
             </div>
         </div>
@@ -503,7 +595,7 @@
                 </div>
                 <div class="server-description">
                     <h2>О сервере YOUR STOP</h2>
-                    <p>YOUR STOP - это премиум сервер выживания в Minecraft, созданный для истинных ценителей этого жанра. Мы предлагаем уникальный опыт игры с тщательно подобранными модами, которые добавляют новые измерения геймплея, не нарушая баланс ванильного Minecraft.</p>
+                    <p>YOUR STOP - это качественный сервер выживания в Minecraft, созданный для истинных ценителей этого жанра. Мы предлагаем уникальный опыт игры с тщательно подобранными модами, которые добавляют новые измерения геймплея, не нарушая баланс ванильного Minecraft.</p>
                     <p>Наше сообщество - это наша гордость. Мы создали дружелюбную атмосферу, где каждый игрок чувствует себя частью большой семьи. Регулярные ивенты, конкурсы строительства и PvP-сражения не дадут вам заскучать!</p>
                     <p>Присоединяйтесь к нам и станьте частью этого удивительного мира!</p>
                 </div>
@@ -511,25 +603,37 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
+    <!-- Live Data Section -->
+    <section class="live-data" id="live">
         <div class="container">
             <div class="section-title">
-                <h2>Галерея сервера</h2>
-                <p>Посмотрите, как выглядит наш удивительный мир</p>
+                <h2>Статистика сервера в реальном времени</h2>
+                <p>Актуальная информация о состоянии сервера</p>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%234CAF50'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'>Постройки игроков</text></svg>" alt="Уникальные постройки игроков на сервере YOUR STOP">
+            <div class="live-stats">
+                <div class="live-stat">
+                    <h3>Онлайн игроков</h3>
+                    <div class="live-stat-value" id="online-players">
+                        <span class="loading">Загрузка...</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%232196F3'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'>Ивенты и события</text></svg>" alt="Регулярные ивенты на сервере YOUR STOP">
+                <div class="live-stat">
+                    <h3>Максимум онлайн</h3>
+                    <div class="live-stat-value" id="max-players">
+                        <span class="loading">Загрузка...</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23FF9800'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'>PvP арены</text></svg>" alt="PvP арены на сервере YOUR STOP">
+                <div class="live-stat">
+                    <h3>Версия</h3>
+                    <div class="live-stat-value" id="server-version">
+                        <span class="loading">Загрузка...</span>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%239C27B0'/><text x='50%' y='50%' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'>Эпические приключения</text></svg>" alt="Приключения на сервере YOUR STOP">
+                <div class="live-stat">
+                    <h3>Статус</h3>
+                    <div class="live-stat-value" id="server-status">
+                        <span class="loading">Загрузка...</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -551,7 +655,7 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Добавьте сервер</h3>
-                    <p>В меню мультиплеера нажмите "Добавить сервер" и введите IP: yourstop.online</p>
+                    <p>В меню мультиплеера нажмите "Добавить сервер" и введите адрес: yourstop.online</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
@@ -565,9 +669,23 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 50px;">
-                <div class="ip-address">IP: yourstop.online</div>
-                <a href="#" class="cta-button">Играть сейчас</a>
+                <div class="ip-address" id="server-ip-2">
+                    yourstop.online
+                    <div class="copy-notification">Скопировано!</div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="container">
+            <h2>Присоединяйтесь к нашему сообществу</h2>
+            <p>Общайтесь с другими игроками, узнавайте о новостях сервера и участвуйте в обсуждениях</p>
+            <a href="https://t.me/yourstopmine" class="telegram-button" target="_blank">
+                <span class="telegram-icon">📢</span>
+                Наш Telegram-канал
+            </a>
         </div>
     </section>
 
@@ -584,14 +702,13 @@
                     <a href="#home">Главная</a>
                     <a href="#features">Особенности</a>
                     <a href="#info">О сервере</a>
-                    <a href="#gallery">Галерея</a>
+                    <a href="#live">Статистика</a>
                     <a href="#join">Как присоединиться</a>
                 </div>
                 <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <p>IP: yourstop.online</p>
+                    <h3>Сообщество</h3>
+                    <a href="https://t.me/yourstopmine" target="_blank">Telegram-канал</a>
                     <p>Версия: 1.19+</p>
-                    <p>Дискорд: discord.gg/yourstop</p>
                 </div>
             </div>
             <div class="copyright">
@@ -604,7 +721,7 @@
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             const nav = document.querySelector('header nav');
-            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+            nav.classList.toggle('active');
         });
 
         // Smooth scrolling for anchor links
@@ -624,11 +741,74 @@
                     
                     // Close mobile menu if open
                     if (window.innerWidth <= 768) {
-                        document.querySelector('header nav').style.display = 'none';
+                        document.querySelector('header nav').classList.remove('active');
                     }
                 }
             });
         });
+
+        // Copy IP address functionality
+        function setupCopyIP(elementId) {
+            const ipElement = document.getElementById(elementId);
+            const notification = ipElement.querySelector('.copy-notification');
+            
+            ipElement.addEventListener('click', function() {
+                const textToCopy = 'yourstop.online';
+                
+                // Using the modern Clipboard API
+                navigator.clipboard.writeText(textToCopy).then(function() {
+                    // Show notification
+                    notification.classList.add('show');
+                    
+                    // Hide notification after 2 seconds
+                    setTimeout(function() {
+                        notification.classList.remove('show');
+                    }, 2000);
+                }).catch(function(err) {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Show notification
+                    notification.classList.add('show');
+                    
+                    // Hide notification after 2 seconds
+                    setTimeout(function() {
+                        notification.classList.remove('show');
+                    }, 2000);
+                });
+            });
+        }
+
+        // Initialize copy functionality for both IP elements
+        setupCopyIP('server-ip');
+        setupCopyIP('server-ip-2');
+
+        // Server status simulation (in a real scenario, you would fetch this from an API)
+        function updateServerStatus() {
+            // Simulate API call delay
+            setTimeout(() => {
+                // Online players (random between 20 and 100 for demo)
+                const onlinePlayers = Math.floor(Math.random() * 80) + 20;
+                document.getElementById('online-players').innerHTML = onlinePlayers;
+                
+                // Max players
+                document.getElementById('max-players').innerHTML = '150';
+                
+                // Server version
+                document.getElementById('server-version').innerHTML = '1.19.4';
+                
+                // Server status
+                document.getElementById('server-status').innerHTML = '<span style="color: #4CAF50;">● Онлайн</span>';
+            }, 1000);
+        }
+
+        // Update server status on page load
+        document.addEventListener('DOMContentLoaded', updateServerStatus);
 
         // Add animation on scroll
         const observerOptions = {
@@ -646,7 +826,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.feature-card, .stat, .step, .gallery-item').forEach(el => {
+        document.querySelectorAll('.feature-card, .stat, .step, .live-stat').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
