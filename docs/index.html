@@ -379,12 +379,13 @@
         .commands-container {
             position: relative;
             overflow: hidden;
-            padding: 0 60px;
+            margin: 0 auto;
+            max-width: 1000px;
         }
 
         .commands-slider {
             display: flex;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease-in-out;
             gap: 20px;
         }
 
@@ -393,7 +394,7 @@
             border-radius: 10px;
             padding: 25px;
             border: 1px solid rgba(76, 175, 80, 0.1);
-            min-width: 320px;
+            width: 320px;
             flex-shrink: 0;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -438,7 +439,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(13, 27, 42, 0.8);
+            background-color: rgba(13, 27, 42, 0.9);
             border: 2px solid var(--primary);
             color: var(--primary);
             width: 50px;
@@ -462,11 +463,11 @@
         }
 
         #prev-btn {
-            left: 0;
+            left: -25px;
         }
 
         #next-btn {
-            right: 0;
+            right: -25px;
         }
 
         /* How to Join Section */
@@ -638,17 +639,21 @@
             }
 
             .command-category {
-                min-width: 280px;
-            }
-
-            .commands-container {
-                padding: 0 40px;
+                width: 280px;
             }
 
             .slider-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 16px;
+            }
+
+            #prev-btn {
+                left: -20px;
+            }
+
+            #next-btn {
+                right: -20px;
             }
         }
     </style>
@@ -745,102 +750,7 @@
             <div class="commands-container">
                 <button class="slider-btn" id="prev-btn">‹</button>
                 <div class="commands-slider" id="commands-slider">
-                    <div class="command-category">
-                        <h3><span>🔨</span> Защита построек</h3>
-                        <div class="command-item">
-                            <div class="command">/build</div>
-                            <div class="command-desc">Режим строительства. Все поставленные блоки становятся защищёнными</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/repair</div>
-                            <div class="command-desc">Режим ремонта. ПКМ по защищённому блоку восстанавливает его HP</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/remove</div>
-                            <div class="command-desc">Режим снятия защиты. ПКМ по защищённому блоку снимает защиту</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/yshelp</div>
-                            <div class="command-desc">Показать список всех игровых команд</div>
-                        </div>
-                    </div>
-                    <div class="command-category">
-                        <h3><span>🔐</span> Пароли и доступ</h3>
-                        <div class="command-item">
-                            <div class="command">/password set &lt;код&gt;</div>
-                            <div class="command-desc">Установить пароль на блок</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/password enter &lt;код&gt;</div>
-                            <div class="command-desc">Ввести пароль для доступа к блоку</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/password remove</div>
-                            <div class="command-desc">Снять пароль с блока</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/password info</div>
-                            <div class="command-desc">Информация о блоке</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/lock &lt;пароль&gt;</div>
-                            <div class="command-desc">Защита дверей паролем (включая двойные)</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/lock remove</div>
-                            <div class="command-desc">Снять защиту с двери</div>
-                        </div>
-                    </div>
-                    <div class="command-category">
-                        <h3><span>🤝</span> Социальные команды</h3>
-                        <div class="command-item">
-                            <div class="command">/friend add &lt;ник&gt;</div>
-                            <div class="command-desc">Добавить друга в список доверенных</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/friend remove &lt;ник&gt;</div>
-                            <div class="command-desc">Удалить друга из списка</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/friend list</div>
-                            <div class="command-desc">Показать список доверенных</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/tpa &lt;ник&gt;</div>
-                            <div class="command-desc">Отправить запрос на телепорт к игроку</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/tpaccept</div>
-                            <div class="command-desc">Принять запрос на телепорт</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/tpdeny</div>
-                            <div class="command-desc">Отклонить запрос на телепорт</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/market</div>
-                            <div class="command-desc">Открыть глобальный рынок для торговли</div>
-                        </div>
-                    </div>
-                    <div class="command-category">
-                        <h3><span>ℹ️</span> Дополнительные команды</h3>
-                        <div class="command-item">
-                            <div class="command">ПКМ по защищённому блоку</div>
-                            <div class="command-desc">Показывает текущее HP блока</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/spawn</div>
-                            <div class="command-desc">Вернуться на спавн</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/home</div>
-                            <div class="command-desc">Телепорт к установленному дому</div>
-                        </div>
-                        <div class="command-item">
-                            <div class="command">/sethome</div>
-                            <div class="command-desc">Установить точку дома</div>
-                        </div>
-                    </div>
+                    <!-- Карточки будут добавлены через JavaScript -->
                 </div>
                 <button class="slider-btn" id="next-btn">›</button>
             </div>
@@ -852,7 +762,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Статистика сервера в реальном времени</h2>
-                <p>Актуальная информация о состоянии сервера на 26.10.2025</p>
+                <p>Актуальная информация о состоянии сервера</p>
             </div>
             <div class="live-stats">
                 <div class="live-stat">
@@ -957,11 +867,10 @@
                     <h3>Сообщество</h3>
                     <a href="https://t.me/yourstopmine" target="_blank">Telegram-канал</a>
                     <p>Версия: 1.19+</p>
-                    <p>Актуально на: 26.10.2025</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023-2025 YOUR STOP Minecraft Server. Все права защищены.</p>
+                <p>&copy; 2023 YOUR STOP Minecraft Server. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -1037,16 +946,97 @@
         setupCopyIP('copy-button-main');
         setupCopyIP('copy-button-footer');
 
-        // Commands slider functionality with infinite loop
+        // Commands data
+        const commandsData = [
+            {
+                title: "🔨 Защита построек",
+                commands: [
+                    { command: "/build", desc: "Режим строительства. Все поставленные блоки становятся защищёнными" },
+                    { command: "/repair", desc: "Режим ремонта. ПКМ по защищённому блоку восстанавливает его HP" },
+                    { command: "/remove", desc: "Режим снятия защиты. ПКМ по защищённому блоку снимает защиту" },
+                    { command: "/yshelp", desc: "Показать список всех игровых команд" }
+                ]
+            },
+            {
+                title: "🔐 Пароли и доступ",
+                commands: [
+                    { command: "/password set <код>", desc: "Установить пароль на блок" },
+                    { command: "/password enter <код>", desc: "Ввести пароль для доступа к блоку" },
+                    { command: "/password remove", desc: "Снять пароль с блока" },
+                    { command: "/password info", desc: "Информация о блоке" },
+                    { command: "/lock <пароль>", desc: "Защита дверей паролем (включая двойные)" },
+                    { command: "/lock remove", desc: "Снять защиту с двери" }
+                ]
+            },
+            {
+                title: "🤝 Социальные команды",
+                commands: [
+                    { command: "/friend add <ник>", desc: "Добавить друга в список доверенных" },
+                    { command: "/friend remove <ник>", desc: "Удалить друга из списка" },
+                    { command: "/friend list", desc: "Показать список доверенных" },
+                    { command: "/tpa <ник>", desc: "Отправить запрос на телепорт к игроку" },
+                    { command: "/tpaccept", desc: "Принять запрос на телепорт" },
+                    { command: "/tpdeny", desc: "Отклонить запрос на телепорт" },
+                    { command: "/market", desc: "Открыть глобальный рынок для торговли" }
+                ]
+            },
+            {
+                title: "ℹ️ Дополнительные команды",
+                commands: [
+                    { command: "ПКМ по защищённому блоку", desc: "Показывает текущее HP блока" },
+                    { command: "/spawn", desc: "Вернуться на спавн" },
+                    { command: "/home", desc: "Телепорт к установленному дому" },
+                    { command: "/sethome", desc: "Установить точку дома" }
+                ]
+            }
+        ];
+
+        // Initialize commands slider
         const slider = document.getElementById('commands-slider');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-        const categories = document.querySelectorAll('.command-category');
+
+        // Create command cards
+        commandsData.forEach(category => {
+            const categoryElement = document.createElement('div');
+            categoryElement.className = 'command-category';
+            
+            const titleElement = document.createElement('h3');
+            const iconSpan = document.createElement('span');
+            iconSpan.textContent = category.title.split(' ')[0];
+            titleElement.appendChild(iconSpan);
+            titleElement.appendChild(document.createTextNode(' ' + category.title.split(' ').slice(1).join(' ')));
+            
+            categoryElement.appendChild(titleElement);
+            
+            category.commands.forEach(cmd => {
+                const commandItem = document.createElement('div');
+                commandItem.className = 'command-item';
+                
+                const commandElement = document.createElement('div');
+                commandElement.className = 'command';
+                commandElement.textContent = cmd.command;
+                
+                const descElement = document.createElement('div');
+                descElement.className = 'command-desc';
+                descElement.textContent = cmd.desc;
+                
+                commandItem.appendChild(commandElement);
+                commandItem.appendChild(descElement);
+                categoryElement.appendChild(commandItem);
+            });
+            
+            slider.appendChild(categoryElement);
+        });
+
+        // Slider functionality with infinite loop
         let currentIndex = 0;
+        const categories = document.querySelectorAll('.command-category');
+        const visibleCards = Math.floor(document.querySelector('.commands-container').offsetWidth / 340);
 
         function updateSlider() {
-            const offset = -currentIndex * 100;
-            slider.style.transform = `translateX(${offset}%)`;
+            const offset = -currentIndex * (340 + 20); // 340px width + 20px gap
+            slider.style.transform = `translateX(${offset}px)`;
         }
 
         function nextSlide() {
@@ -1065,9 +1055,9 @@
         // Initialize slider
         updateSlider();
 
-        // Server status with realistic data for 2025
+        // Server status with realistic data
         function fetchServerStatus() {
-            // Simulate realistic server data for 2025
+            // Simulate realistic server data
             const serverData = {
                 online: true,
                 players: {
