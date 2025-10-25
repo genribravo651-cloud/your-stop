@@ -133,6 +133,7 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
         }
 
         .ip-address {
@@ -172,20 +173,25 @@
 
         .copy-notification {
             position: absolute;
-            bottom: -40px;
+            bottom: -45px;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--primary);
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            pointer-events: none;
         }
 
         .copy-notification.show {
             opacity: 1;
+            bottom: -50px;
         }
 
         .cta-button {
@@ -373,11 +379,12 @@
         .commands-container {
             position: relative;
             overflow: hidden;
+            padding: 0 60px;
         }
 
         .commands-slider {
             display: flex;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
             gap: 20px;
         }
 
@@ -386,8 +393,9 @@
             border-radius: 10px;
             padding: 25px;
             border: 1px solid rgba(76, 175, 80, 0.1);
-            min-width: 300px;
+            min-width: 320px;
             flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .command-category h3 {
@@ -426,40 +434,50 @@
             opacity: 0.8;
         }
 
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
         .slider-btn {
-            background-color: rgba(13, 27, 42, 0.7);
-            border: 1px solid var(--primary);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(13, 27, 42, 0.8);
+            border: 2px solid var(--primary);
             color: var(--primary);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .slider-btn:hover {
             background-color: var(--primary);
             color: white;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .slider-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
         .slider-btn:disabled:hover {
-            background-color: rgba(13, 27, 42, 0.7);
+            background-color: rgba(13, 27, 42, 0.8);
             color: var(--primary);
+            transform: translateY(-50%) scale(1);
+        }
+
+        #prev-btn {
+            left: 0;
+        }
+
+        #next-btn {
+            right: 0;
         }
 
         /* How to Join Section */
@@ -633,6 +651,16 @@
             .command-category {
                 min-width: 280px;
             }
+
+            .commands-container {
+                padding: 0 40px;
+            }
+
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -669,8 +697,8 @@
                 <div class="ip-container">
                     <div class="ip-address">yourstop.online</div>
                     <button class="copy-button" id="copy-button-main">Копировать IP</button>
+                    <div class="copy-notification" id="copy-notification">IP скопирован в буфер!</div>
                 </div>
-                <div class="copy-notification" id="copy-notification">Скопировано в буфер обмена!</div>
                 <a href="#join" class="cta-button">Присоединиться сейчас</a>
             </div>
         </div>
@@ -726,6 +754,7 @@
                 <p>Все необходимые команды для комфортной игры</p>
             </div>
             <div class="commands-container">
+                <button class="slider-btn" id="prev-btn">‹</button>
                 <div class="commands-slider" id="commands-slider">
                     <div class="command-category">
                         <h3><span>🔨</span> Защита построек</h3>
@@ -805,10 +834,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="slider-btn" id="prev-btn">←</button>
-                    <button class="slider-btn" id="next-btn">→</button>
-                </div>
+                <button class="slider-btn" id="next-btn">›</button>
             </div>
         </div>
     </section>
@@ -885,6 +911,7 @@
                 <div class="ip-container">
                     <div class="ip-address">yourstop.online</div>
                     <button class="copy-button" id="copy-button-footer">Копировать IP</button>
+                    <div class="copy-notification">IP скопирован в буфер!</div>
                 </div>
             </div>
         </div>
@@ -963,7 +990,7 @@
         // Copy IP address functionality
         function setupCopyIP(buttonId) {
             const copyButton = document.getElementById(buttonId);
-            const notification = document.getElementById('copy-notification');
+            const notification = copyButton.parentElement.querySelector('.copy-notification');
             
             copyButton.addEventListener('click', function() {
                 const textToCopy = 'yourstop.online';
