@@ -40,7 +40,7 @@
         /* Header Styles */
         header {
             background-color: rgba(13, 27, 42, 0.95);
-            padding: 20px 0;
+            padding: 15px 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -58,27 +58,32 @@
         .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .logo h1 {
-            font-size: 28px;
+            font-size: 24px;
             color: var(--primary);
             text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-            margin-left: 10px;
+            margin-left: 8px;
+            white-space: nowrap;
         }
 
         .logo-icon {
-            font-size: 32px;
+            font-size: 28px;
             color: var(--primary);
+            flex-shrink: 0;
         }
 
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: nowrap;
+            gap: 15px;
         }
 
         nav ul li {
-            margin-left: 30px;
+            margin-left: 0;
         }
 
         nav ul li a {
@@ -86,8 +91,10 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         nav ul li a:hover {
@@ -97,8 +104,12 @@
 
         .mobile-menu {
             display: none;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--light);
+            padding: 5px;
         }
 
         /* Hero Section */
@@ -109,7 +120,7 @@
             justify-content: center;
             text-align: center;
             background: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a2a3a"/><path d="M0 0L100 100M100 0L0 100" stroke="%230d1b2a" stroke-width="1"/></svg>') no-repeat center center/cover;
-            padding-top: 80px;
+            padding-top: 70px;
         }
 
         .hero-content h2 {
@@ -630,6 +641,32 @@
             }
         }
 
+        @media (max-width: 1024px) {
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav ul li a {
+                font-size: 13px;
+                padding: 5px 10px;
+            }
+            
+            .logo h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 8px;
+            }
+            
+            nav ul li a {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content nav {
                 display: none;
@@ -648,14 +685,26 @@
 
             .header-content nav ul {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .header-content nav ul li {
-                margin: 10px 0;
+                margin: 0;
+            }
+
+            .header-content nav ul li a {
+                font-size: 16px;
+                padding: 10px 15px;
+                display: block;
+                text-align: center;
             }
 
             .mobile-menu {
                 display: block;
+            }
+
+            .hero {
+                padding-top: 60px;
             }
 
             .hero-content h2 {
@@ -724,12 +773,12 @@
                         <li><a href="#community">Сообщество</a></li>
                     </ul>
                 </nav>
-                <div class="mobile-menu">☰</div>
+                <button class="mobile-menu">☰</button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Остальной код остается без изменений -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
@@ -974,7 +1023,7 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 70,
                         behavior: 'smooth'
                     });
                     
